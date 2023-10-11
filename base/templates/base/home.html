@@ -1,0 +1,44 @@
+{% extends 'main.html'%}
+{% block content %}
+<div class="container">
+     <div class="navbar">
+
+     </div>
+     <div class='acc-name'><h1>{{accounts.name}}</h1></div>
+    <div class="main-info">
+     <div class="acc-no">{{accounts.account_number}}
+</div>
+     <div class="info"> Hi, {{customer.user.username}}</div>
+   <div class="balance"><small>balance</small><br>{{accounts.balance}}</div>
+    </div>
+
+    <div class="other-info">
+     <div class="operation">
+          <div><a href="{% url 'transaction' 0%}"> <button class="btn" type="button">Transfer</button></a>
+          <a href="#"> <button type="button">###</button></a>
+          <a href="#"> <button type="button">###</button></a></div>
+
+     </div>
+     <div class="transcations">
+          <h4><a href="{% url 'transactions'%}">Transactions</a></h4>
+          {%for transaction in transactions %}
+         
+          <div class="tran-content"> <div>{% if transaction.receiver == accounts.name%}credit
+               {%else%}debit {%endif%}
+          </div>
+     <div class="tran-name"><div class="name-1">{% if transaction.receiver == accounts.name %}
+          {{transaction.sender}}
+        {%else%} {{transaction.receiver}}{%endif%}
+     </div>
+          <div  class="name-2">{% if transaction.recv_no != num %} you sent
+               {%else%} {{transaction.recv_no}}{% endif%}</div>
+     </div>
+     <div>{{transaction.amount}}</div>
+     </div>
+
+     {%endfor%}
+      
+     </div>
+    </div>
+    </div>
+    {% endblock %}
